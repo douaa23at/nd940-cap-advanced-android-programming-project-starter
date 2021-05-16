@@ -1,12 +1,16 @@
 package com.example.android.politicalpreparedness.representative
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.android.politicalpreparedness.databinding.FragmentDetailBinding
+import com.example.android.politicalpreparedness.databinding.FragmentElectionBinding
 import com.example.android.politicalpreparedness.network.models.Address
 import java.util.Locale
 
@@ -21,6 +25,9 @@ class DetailFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        val binding = FragmentDetailBinding.inflate(inflater)
+        binding.lifecycleOwner = this
+        return binding.root
 
         //TODO: Establish bindings
 
@@ -48,6 +55,10 @@ class DetailFragment : Fragment() {
 
     private fun isPermissionGranted() : Boolean {
         //TODO: Check if permission is already granted and return (true = granted, false = denied/other)
+        return ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun getLocation() {
