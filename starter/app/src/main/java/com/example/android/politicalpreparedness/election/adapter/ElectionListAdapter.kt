@@ -13,9 +13,9 @@ import com.example.android.politicalpreparedness.databinding.ViewholderElectionB
 import com.example.android.politicalpreparedness.election.ElectionsViewModel
 import com.example.android.politicalpreparedness.network.models.Election
 
-class ElectionListAdapter(private val clickListener: ElectionListener): ListAdapter<Election, ElectionViewHolder>(ElectionDiffCallback) {
+class ElectionListAdapter : ListAdapter<Election, ElectionViewHolder>(ElectionDiffCallback) {
 
-   var items = emptyList<Election>()
+    var items = emptyList<Election>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ElectionViewHolder {
         return ElectionViewHolder(
                 ViewholderElectionBinding.inflate(
@@ -27,7 +27,7 @@ class ElectionListAdapter(private val clickListener: ElectionListener): ListAdap
     }
 
     override fun onBindViewHolder(holder: ElectionViewHolder, position: Int) {
-       holder.bind(items[position])
+        holder.bind(items[position])
     }
 
     override fun getItemCount() = items.count()
@@ -35,7 +35,7 @@ class ElectionListAdapter(private val clickListener: ElectionListener): ListAdap
 
     //TODO: Add companion object to inflate ViewHolder (from)
 
-companion object
+
 
 }
 
@@ -43,11 +43,12 @@ class ElectionViewHolder(private var binding: ViewholderElectionBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
     fun bind(asteroid: Election) {
-      //  binding.mainViewModel = mainViewModel
+        //  binding.mainViewModel = mainViewModel
         //binding.asteroid = asteroid
         binding.executePendingBindings()
     }
 }
+
 object ElectionDiffCallback : DiffUtil.ItemCallback<Election>() {
     override fun areItemsTheSame(oldItem: Election, newItem: Election): Boolean {
         return oldItem === newItem
@@ -58,7 +59,7 @@ object ElectionDiffCallback : DiffUtil.ItemCallback<Election>() {
     }
 }
 
-object ElectionListener : View.OnClickListener{
+object ElectionListener : View.OnClickListener {
     override fun onClick(v: View?) {
         TODO("Not yet implemented")
     }

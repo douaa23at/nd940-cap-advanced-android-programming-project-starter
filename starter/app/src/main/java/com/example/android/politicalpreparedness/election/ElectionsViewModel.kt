@@ -1,10 +1,19 @@
 package com.example.android.politicalpreparedness.election
 
 import android.app.Application
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.android.politicalpreparedness.network.models.Election
+import com.example.android.politicalpreparedness.utils.Event
 
 //TODO: Construct ViewModel and provide election datasource
 class ElectionsViewModel(): ViewModel() {
+    val elections = MutableLiveData<Event<List<Election>>>()
+    val savedelections = MutableLiveData<Event<List<Election>>>()
+
+    fun initialized(){
+
+    }
 
     //TODO: Create live data val for upcoming elections
 
