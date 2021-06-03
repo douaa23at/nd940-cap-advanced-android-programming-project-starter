@@ -1,47 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="representative"
-            type="com.example.android.politicalpreparedness.representative.model.Representative" />
+            name="official"
+            type="com.example.android.politicalpreparedness.network.models.Official" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/representativePhoto"
+            android:id="@+id/officialPhoto"
+            profileImage="@{official.photoUrl}"
+            android:layout_width="@dimen/ic_dimen_image"
+            android:layout_height="@dimen/ic_dimen_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ballot_logo" />
+
+        <TextView
+            android:id="@+id/role"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@{official.name}"
+            app:layout_constraintStart_toEndOf="@id/officialPhoto"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{official.name}"
+            app:layout_constraintStart_toEndOf="@id/officialPhoto"
+            app:layout_constraintTop_toBottomOf="@+id/role" />
+
+        <TextView
+            android:id="@+id/party"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{official.party}"
+            app:layout_constraintEnd_toStartOf="@+id/wwwIcon"
+            app:layout_constraintStart_toEndOf="@id/officialPhoto"
+            app:layout_constraintTop_toBottomOf="@+id/name" />
+
+        <ImageView
+            android:id="@+id/wwwIcon"
+            android:layout_marginHorizontal="@dimen/ic_margin"
+            android:layout_width="@dimen/ic_dimen"
+            android:layout_height="@dimen/ic_dimen"
+            android:src="@drawable/ic_www"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/facebookIcon"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/party" />
 
         <ImageView
             android:id="@+id/facebookIcon"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginHorizontal="@dimen/ic_margin"
+            android:layout_width="@dimen/ic_dimen"
+            android:layout_height="@dimen/ic_dimen"
+            android:src="@drawable/ic_facebook"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/twitterIcon"
+            app:layout_constraintStart_toEndOf="@+id/wwwIcon" />
 
         <ImageView
             android:id="@+id/twitterIcon"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/ic_margin"
+            android:layout_width="@dimen/ic_dimen"
+            android:layout_height="@dimen/ic_dimen"
+            android:src="@drawable/ic_twitter"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-        <ImageView
-            android:id="@+id/wwwIcon"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@id/facebookIcon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

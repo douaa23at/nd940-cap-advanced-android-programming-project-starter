@@ -16,9 +16,10 @@ import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.ViewholderRepresentativeBinding
 import com.example.android.politicalpreparedness.network.models.Channel
 import com.example.android.politicalpreparedness.network.models.Election
+import com.example.android.politicalpreparedness.network.models.Official
 import com.example.android.politicalpreparedness.representative.model.Representative
 
-class RepresentativeListAdapter() : ListAdapter<Representative, RepresentativeViewHolder>(RepresentativeDiffCallback) {
+class RepresentativeListAdapter() : ListAdapter<Official, RepresentativeViewHolder>(RepresentativeDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepresentativeViewHolder {
         return RepresentativeViewHolder(
@@ -39,9 +40,9 @@ class RepresentativeListAdapter() : ListAdapter<Representative, RepresentativeVi
 
 class RepresentativeViewHolder(val binding: ViewholderRepresentativeBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: Representative) {
-        binding.representative = item
-        binding.representativePhoto.setImageResource(R.drawable.ic_profile)
+    fun bind(item: Official) {
+        binding.official = item
+        binding.officialPhoto.setImageResource(R.drawable.ic_profile)
 
         //TODO: Show social links ** Hint: Use provided helper methods
         //TODO: Show www link ** Hint: Use provided helper methods
@@ -92,16 +93,14 @@ class RepresentativeViewHolder(val binding: ViewholderRepresentativeBinding) : R
 
 }
 
-object RepresentativeDiffCallback : DiffUtil.ItemCallback<Representative>() {
-    override fun areItemsTheSame(oldItem: Representative, newItem: Representative): Boolean {
+object RepresentativeDiffCallback : DiffUtil.ItemCallback<Official>() {
+    override fun areItemsTheSame(oldItem: Official, newItem: Official): Boolean {
         return oldItem === newItem
     }
 
-    override fun areContentsTheSame(oldItem: Representative, newItem: Representative): Boolean {
-        return oldItem.office == newItem.office
+    override fun areContentsTheSame(oldItem: Official, newItem: Official): Boolean {
+        return oldItem.name == newItem.name
     }
 }
-
-//TODO: Create RepresentativeDiffCallback
 
 //TODO: Create RepresentativeListener

@@ -2,8 +2,22 @@
 <resources>
     <string name="app_name">Political Preparedness</string>
     <string name="upcomming_elections">Upcomming elections</string>
-    <string name="find_my_representatives">Upcomming elections</string>
+    <string name="find_my_representatives">Find my representatives</string>
+    <string name="use_my_location">Use my location</string>
     <string name="saved_elections">Saved elections</string>
+    <string name="permission_denied_explanation_settings">Permission denied</string>
+    <string name="settings">Settings</string>
+    <string name="state_header">Election Information</string>
+    <string name="follow">follow</string>
+    <string name="unfollow">unfollow</string>
+    <string name="correspondence_header">Correspondence</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="address_line_1">Address line 1</string>
+    <string name="address_line_2">Address line 2</string>
+    <string name="city">City</string>
+    <string name="zip">Zip</string>
+
 
     <!-- TODO: Add necessary string values -->
 

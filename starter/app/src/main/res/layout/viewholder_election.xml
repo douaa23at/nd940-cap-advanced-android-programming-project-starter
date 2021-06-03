@@ -1,32 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
+        <variable
+            name="election"
+            type="com.example.android.politicalpreparedness.network.models.Election" />
+
         <variable
             name="viewModel"
-            type="" />
+            type="com.example.android.politicalpreparedness.election.ElectionsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{()-> viewModel.navigateToDetailFragment(election)}"
+        android:padding="@dimen/default_padding">
 
         <TextView
             android:id="@+id/electionHeadline"
-            style="@style/TextAppearance.MaterialComponents.Headline5"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="@{election.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/electionDate"
+            style="@style/TextAppearance.MaterialComponents.Subtitle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="@{election.electionDay.toString()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/electionHeadline" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

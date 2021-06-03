@@ -3,19 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layoutDescription="@xml/motion_scene"
         tools:context="com.example.android.politicalpreparedness.MainActivity">
 
         <TextView
             android:id="@+id/electionsHeader"
+            style="@style/TextAppearance.MaterialComponents.Headline5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/default_padding"
+            android:paddingVertical="@dimen/launch_margin"
             android:text="@string/upcomming_elections"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/electionRecyclerView"
             android:layout_width="0dp"
@@ -26,9 +32,13 @@
 
         <TextView
             android:id="@+id/savedElectionsHeader"
+            style="@style/TextAppearance.MaterialComponents.Headline5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/default_padding"
+            android:paddingVertical="@dimen/launch_margin"
             android:text="@string/saved_elections"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/electionRecyclerView" />
@@ -41,5 +51,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/savedElectionsHeader" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
