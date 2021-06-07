@@ -13,13 +13,16 @@ import android.provider.Settings
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
+import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.politicalpreparedness.BuildConfig
 import com.example.android.politicalpreparedness.databinding.FragmentDetailBinding
 import com.example.android.politicalpreparedness.R
+import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.example.android.politicalpreparedness.network.models.Address
 import com.example.android.politicalpreparedness.representative.adapter.RepresentativeListAdapter
 import com.google.android.gms.location.*
@@ -41,19 +44,20 @@ class DetailFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        val binding = FragmentDetailBinding.inflate(inflater)
+        val binding = FragmentRepresentativeBinding.inflate(inflater)
         binding.lifecycleOwner = this
         val adapter = RepresentativeListAdapter()
         binding.representativesList.adapter = adapter
+        binding.representativesList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         representativeViewModel.getLocation.observe(viewLifecycleOwner, Observer {
             checkLocationPermissions()
         })
         representativeViewModel.officials.observe(viewLifecycleOwner, Observer { officials ->
             adapter.submitList(officials)
+            hideKeyboard()
         })
 
-        binding.viewModel = representativeViewModel
-        binding.states.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.state.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
@@ -63,14 +67,8 @@ class DetailFragment : Fragment() {
             }
 
         }
-
+        binding.viewModel = representativeViewModel
         return binding.root
-
-        //TODO: Define and assign Representative adapter
-
-        //TODO: Populate Representative adapter
-
-        //TODO: Establish button listeners for field and location search
 
     }
 
@@ -103,7 +101,6 @@ class DetailFragment : Fragment() {
 
 
     private fun isPermissionGranted(): Boolean {
-        //TODO: Check if permission is already granted and return (true = granted, false = denied/other)
         return ContextCompat.checkSelfPermission(
                 requireContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION

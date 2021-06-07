@@ -19,7 +19,7 @@ import com.example.android.politicalpreparedness.network.models.Election
 import com.example.android.politicalpreparedness.network.models.Official
 import com.example.android.politicalpreparedness.representative.model.Representative
 
-class RepresentativeListAdapter() : ListAdapter<Official, RepresentativeViewHolder>(RepresentativeDiffCallback) {
+class RepresentativeListAdapter : ListAdapter<Official, RepresentativeViewHolder>(RepresentativeDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepresentativeViewHolder {
         return RepresentativeViewHolder(
@@ -42,15 +42,10 @@ class RepresentativeViewHolder(val binding: ViewholderRepresentativeBinding) : R
 
     fun bind(item: Official) {
         binding.official = item
-        binding.officialPhoto.setImageResource(R.drawable.ic_profile)
-
-        //TODO: Show social links ** Hint: Use provided helper methods
-        //TODO: Show www link ** Hint: Use provided helper methods
-
+        showSocialLinks(item.channels.orEmpty())
+        showWWWLinks(item.urls.orEmpty())
         binding.executePendingBindings()
     }
-
-    //TODO: Add companion object to inflate ViewHolder (from)
 
     private fun showSocialLinks(channels: List<Channel>) {
         val facebookUrl = getFacebookUrl(channels)

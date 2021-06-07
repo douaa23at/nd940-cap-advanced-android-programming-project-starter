@@ -15,44 +15,56 @@
 
         <ImageView
             android:id="@+id/officialPhoto"
+            android:layout_margin="@dimen/ic_margin"
             profileImage="@{official.photoUrl}"
             android:layout_width="@dimen/ic_dimen_image"
             android:layout_height="@dimen/ic_dimen_image"
+            android:src="@drawable/ic_profile"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ballot_logo" />
+            tools:src="@drawable/ic_profile" />
 
         <TextView
             android:id="@+id/role"
-            android:layout_width="0dp"
+            style="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/ic_margin"
             android:text="@{official.name}"
+            app:layout_constraintBottom_toTopOf="@+id/name"
             app:layout_constraintStart_toEndOf="@id/officialPhoto"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"
+            tools:text="@string/representative_search" />
 
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/ic_margin"
             android:text="@{official.name}"
+            app:layout_constraintBottom_toTopOf="@+id/party"
             app:layout_constraintStart_toEndOf="@id/officialPhoto"
-            app:layout_constraintTop_toBottomOf="@+id/role" />
+            app:layout_constraintTop_toBottomOf="@+id/role"
+            tools:text="@string/representative_search" />
 
         <TextView
             android:id="@+id/party"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/ic_margin"
             android:text="@{official.party}"
-            app:layout_constraintEnd_toStartOf="@+id/wwwIcon"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/officialPhoto"
-            app:layout_constraintTop_toBottomOf="@+id/name" />
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            tools:text="@string/representative_search" />
 
         <ImageView
             android:id="@+id/wwwIcon"
-            android:layout_marginHorizontal="@dimen/ic_margin"
             android:layout_width="@dimen/ic_dimen"
             android:layout_height="@dimen/ic_dimen"
+            android:layout_marginStart="@dimen/ic_margin"
             android:src="@drawable/ic_www"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/facebookIcon"
@@ -61,9 +73,9 @@
 
         <ImageView
             android:id="@+id/facebookIcon"
-            android:layout_marginHorizontal="@dimen/ic_margin"
             android:layout_width="@dimen/ic_dimen"
             android:layout_height="@dimen/ic_dimen"
+            android:layout_marginStart="@dimen/ic_margin"
             android:src="@drawable/ic_facebook"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/twitterIcon"
@@ -71,9 +83,9 @@
 
         <ImageView
             android:id="@+id/twitterIcon"
-            android:layout_marginHorizontal="@dimen/ic_margin"
             android:layout_width="@dimen/ic_dimen"
             android:layout_height="@dimen/ic_dimen"
+            android:layout_marginStart="@dimen/ic_margin"
             android:src="@drawable/ic_twitter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

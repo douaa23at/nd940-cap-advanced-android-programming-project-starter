@@ -17,8 +17,9 @@ fun fetchImage(view: ImageView, src: String?) {
                 .load(uri)
                 .apply(RequestOptions()
                         .circleCrop()
-                        .placeholder(R.drawable.ic_profile)
-                        .error(R.drawable.ic_profile))
+                        .fallback(R.drawable.ic_profile)
+                        .error(R.drawable.ic_profile)
+                        .placeholder(R.drawable.ic_profile))
                 .into(view)
 
     }
