@@ -23,7 +23,7 @@
         android:id="@+id/representativeFragment"
         android:name="com.example.android.politicalpreparedness.representative.DetailFragment"
         android:label="fragment_representative"
-        tools:layout="@layout/fragment_representative"></fragment>
+        tools:layout="@layout/fragment_representative" />
     <fragment
         android:id="@+id/voterInfoFragment"
         android:name="com.example.android.politicalpreparedness.election.VoterInfoFragment"
@@ -49,7 +49,7 @@
     <fragment
         android:id="@+id/myCustomWebViewFragment"
         android:name="com.example.android.politicalpreparedness.election.MyCustomWebViewFragment"
-        android:label="MyCustomWebViewFragment" >
+        android:label="MyCustomWebViewFragment">
         <argument
             android:name="url"
             app:argType="string" />

@@ -47,16 +47,5 @@ class ElectionsFragment : Fragment() {
         return binding.root
     }
 
-    //TODO: Add ViewModel values and create ViewModel
-
-    //TODO: Add binding values
-
-    //TODO: Link elections to voter info
-
-
-    //TODO: Populate recycler adapters
-
-
-    //TODO: Refresh adapters when fragment loads
 
 }

@@ -27,7 +27,6 @@ class ElectionListAdapter(
         holder.bind(getItem(position), electionsViewModel)
     }
 
-    //TODO: Add companion object to inflate ViewHolder (from)
 
     class ElectionViewHolder(private var binding: ViewholderElectionBinding) :
             RecyclerView.ViewHolder(binding.root) {

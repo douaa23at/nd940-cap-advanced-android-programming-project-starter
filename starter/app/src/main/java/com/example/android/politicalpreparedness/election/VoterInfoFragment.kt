@@ -32,8 +32,38 @@ class VoterInfoFragment : Fragment() {
         val binding = FragmentVoterInfoBinding.inflate(inflater)
         binding.lifecycleOwner = this
         voterInfoViewModel.initialize(args.argDivision, args.argElectionId)
-        voterInfoViewModel.voterInfoResponse.observe(viewLifecycleOwner, Observer {
-            Log.i("douaa : " + it.toString(), "douaa")
+        voterInfoViewModel.voterInfoResponse.observe(viewLifecycleOwner, Observer { voterInfoResponse ->
+            if (voterInfoResponse.election.name.isEmpty()) {
+                binding.electionName.visibility = View.INVISIBLE
+            } else {
+                binding.electionName.visibility = View.VISIBLE
+            }
+
+            if (voterInfoResponse.pollingLocations?.get(0)?.address?.toFormattedString().isNullOrEmpty()) {
+                binding.stateLocations.visibility = View.INVISIBLE
+            } else {
+                binding.stateLocations.visibility = View.VISIBLE
+            }
+
+            if (voterInfoResponse.state?.get(0)?.electionAdministrationBody?.electionInfoUrl.isNullOrEmpty()) {
+                binding.stateBallot.visibility = View.INVISIBLE
+            } else {
+                binding.stateBallot.visibility = View.VISIBLE
+            }
+
+            if (voterInfoResponse.state?.get(0)?.electionAdministrationBody?.correspondenceAddress?.toFormattedString().isNullOrEmpty()) {
+                binding.address.visibility = View.INVISIBLE
+            } else {
+                binding.address.visibility = View.VISIBLE
+            }
+
+        })
+        voterInfoViewModel.savedElections.observe(viewLifecycleOwner, Observer { savedElections ->
+            val election = savedElections.find {
+                it.id == args.argElectionId
+            }
+            val follow: Boolean = election == null
+            voterInfoViewModel.toFollow.value = follow
         })
 
         voterInfoViewModel.openLink.observe(viewLifecycleOwner, Observer {
@@ -43,14 +73,13 @@ class VoterInfoFragment : Fragment() {
         })
 
 
-        voterInfoViewModel.toFollow.observe(viewLifecycleOwner, Observer {
-            it.getContentIfNotHandled()?.let { tofollow ->
-                binding.follow.text = if (tofollow) {
-                    getString(R.string.follow)
-                } else {
-                    getString(R.string.unfollow)
-                }
+        voterInfoViewModel.toFollow.observe(viewLifecycleOwner, Observer { tofollow ->
+            binding.follow.text = if (tofollow) {
+                getString(R.string.follow)
+            } else {
+                getString(R.string.unfollow)
             }
+
         })
 
         voterInfoViewModel.finish.observe(viewLifecycleOwner, Observer {
@@ -62,8 +91,6 @@ class VoterInfoFragment : Fragment() {
         binding.viewModel = voterInfoViewModel
         return binding.root
 
-
-        //TODO: Add binding values
 
         //TODO: Populate voter info -- hide views without provided data.
         /**
@@ -77,9 +104,6 @@ class VoterInfoFragment : Fragment() {
         //TODO: cont'd Handle save button clicks
 
     }
-
-
-
 
 
     //TODO: Create method to load URL intents

@@ -14,16 +14,18 @@ class VoterInfoViewModel(dataSource: ElectionDao) : ViewModel() {
 
     private val repository = ElectionRepository(dataSource)
     val voterInfoResponse = repository.voterInfoResponse
+    val savedElections = repository.savedElections
     val openLink = MutableLiveData<Event<String>>()
-    val toFollow = MutableLiveData<Event<Boolean>>()
+    val toFollow = MutableLiveData<Boolean>()
     val finish = MutableLiveData<Event<Unit>>()
     fun initialize(division: Division, electionId: Int) {
         viewModelScope.launch {
             repository.getVoterInfoResponse("1263%20Pacific%20Ave.%20Kansas%20City%20KS", electionId)
-            val election = repository.savedElections.value?.find {
+            val election = savedElections.value?.find {
                 it.id == electionId
             }
-            toFollow.value = Event(election == null)
+            val follow: Boolean = election == null
+            toFollow.value = follow
         }
     }
 
@@ -31,7 +33,7 @@ class VoterInfoViewModel(dataSource: ElectionDao) : ViewModel() {
      * Hint: The saved state can be accomplished in multiple ways. It is directly related to how elections are saved/removed from the database.
      */
     fun handleElection(election: Election) {
-        if (toFollow.value == Event(true)) {
+        if (toFollow.value == true) {
             viewModelScope.launch {
                 repository.saveElection(election)
             }
@@ -47,7 +49,6 @@ class VoterInfoViewModel(dataSource: ElectionDao) : ViewModel() {
         voterInfoResponse.value?.state?.get(0)?.electionAdministrationBody?.electionInfoUrl?.let {
             openLink.value = Event(it)
         }
-
     }
 
 }
